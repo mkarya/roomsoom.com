@@ -1,0 +1,73 @@
+<?php
+session_start();
+$user = $_SESSION['username'];
+$log = $_SESSION['member'];
+if ($log != "log"){
+	header ("Location: login.php");
+}
+?>
+
+
+<html>
+<head>
+<link rel="stylesheet" href="vertical_bar.css">
+<title>Home(Member)
+</title>
+</head>
+<body link="#0066FF" vlink="#6633CC" bgcolor="#FFFFFF" background="images/image001.jpg" style='margin:0'>
+
+<?php include 'topbar.php' ?>
+<?php include 'sidebar.php' ?>
+
+<maindiv>
+<?php
+	
+	$mess = "";
+	$user = $_GET['username'];
+	$conversionStatus = $_GET['conversionStatus'];
+	include 'sqli.php';
+	
+	$yy=date("m") - 1;
+	$xx=date("Y")."-".$yy."-".'1';
+	
+	if ($user == 'na' && $conversionStatus == 'open') {
+		$sql = "SELECT * FROM `rs_sales_query` where `Date` >='$xx'  AND `Conversion_Status`= '' ORDER BY `query_id` DESC LIMIT 100";
+	} else if ($user == 'na' && $conversionStatus == 'close') {
+		$sql = "SELECT * FROM `rs_sales_query` where `Date` >='$xx'  AND `Conversion_Status` <> '' ORDER BY `query_id` DESC LIMIT 100";	
+	} else if ($user == 'na' && $conversionStatus == 'Interested') {
+			$sql = "SELECT * FROM `rs_sales_query` where  `Conversion_Status` = '$conversionStatus'  ORDER BY `query_id` DESC LIMIT 50";
+	}
+	else if ($user != 'na' && $conversionStatus == 'open') {
+		$user = $_SESSION['username'];
+		$sql = "SELECT * FROM `rs_sales_query` where `Date` >='$xx'  AND `Conversion_Status`= '' AND `query_owner` = '$user' ORDER BY `query_id` DESC LIMIT 100";
+	}
+	else {
+		$user = $_SESSION['username'];
+		$sql = "SELECT * FROM `rs_sales_query` where `Date` >='$xx'  AND `Conversion_Status` <> '' AND  `query_owner` = '$user' ORDER BY `query_id` DESC LIMIT 100";
+	}
+
+	$user = $_SESSION['username'];
+	$result = $db_handle->query($sql);
+	echo $db_handle->error;
+		
+	print("</table>");
+?>
+
+
+<?php
+
+echo '<table bgcolor="white" width="90%">';
+echo '<tr><th> <h2>'. "Lead ID". '</h2> </th> <td><h2>'." Creation Date". '</h2></td>  <td><h2>'. "Customer Name".'</h2> </td> <td><h2>'. "Phone number".'</h2> </td><td><h2>'. "email".'</h2> </td> <td> <h2>'."Location".'</h2> </td><td> <h2> Convertion Status </h2> </td>'.'</h2> </td><td> <h2> Owner </h2> </td>'.'</h2> </td><td> <h2> Convert By </h2> </td></tr>';
+	echo "<p style='color:navy; font-size:20px;'> Totol records : $result->num_rows </p>";
+	
+	while($row = $result->fetch_assoc()) {
+    		echo '<tr><td> <a href = sales_query.php?query_id='.$row["query_id"].'>'. $row["query_id"] .'</a> </td> <td><h4>'. $row["Date"] .'</td> <td>'. $row["Name_of_Person"].' </td> <td>'. str_replace(" ", "",$row["Contact_Number"]).' </td><td>'. $row["Mail_ID"].' </td> <td>'.$row["Location"].'</td>'.'<td>'.$row["Conversion_Status"].' </td>'.'<td>'.$row["query_owner"].'</td>'.'<td>'.$row["Convert_By"].'</td></tr>';
+        }
+echo '</table>';
+
+$db_handle->close();
+?>
+
+</maindiv>
+</body>
+</html>

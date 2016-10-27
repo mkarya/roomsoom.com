@@ -1,0 +1,77 @@
+#!/usr/bin/php
+
+<?php
+
+class sendMail
+{
+var $toUserName;
+var $subject;	
+var $headers;
+var $toList;
+var $mailBody;
+var $to;
+
+	function sendMail() {
+		$this->headers = "From: no-reply@roomsoom.com"."\r\n"."Reply-To: mukesh.arya@roomsoom.com" ;
+		#$this->headers = "Reply-To: mukesh.arya@roomsoom.com" ;
+	}
+
+	public function addHeaderTypeHTML() {
+		$this->headers .= "\r\n";
+		$this->headers .= 'MIME-Version: 1.0' . "\r\n";
+		$this->headers .= 'Content-type: text/html;charset=iso-8859-1';
+	}
+
+	public function addHeaderTypeCC($ccmail) {
+		$this->headers .= "\r\n";
+		$this->headers .= "Cc: $ccmail";
+	}
+	
+	function setSubjectSalesCreation($id) {
+		$this->subject .= "Sales lead : $id created and assigned to you.";
+	}
+	
+	function setSubjectSalesUpdate($id) {
+		$this->subject .= 'Sales lead : $id updated and need your attention';
+	}
+
+	function setSubjectSalesClosed($id, $outcome) {
+		$this->subject .= 'Sales lead : $id closed as $outcome';
+	}
+	
+	
+	function setMailBody($username, $id, $extraText) {
+		$this->mailBody = "
+			<html>
+			<head>
+			  <title>Sales Lead update for $id </title>
+			</head>
+			<body>
+			  <p style='font-size:16px;font-color:navy;'> Dear $username, <br> <br> <br>  $extraText </p>
+			
+			</body>
+			</html> ";
+	}
+	
+	function setToheaders($email) {
+		$this->to  = $email;
+		return;
+	}
+	
+	function setEscalation($manager) {
+		$this->headers .= "\r\n";
+		$this->headers .= "Cc: $manager";
+	}
+	
+	function sendMailTo() {
+		if (empty($this->to) || empty($this->headers) || empty($this->mailBody)){
+			print "mail can not be sent \n";
+		}
+		else {
+		   if (mail($this->to, $this->subject, $this->mailBody, $this->headers) == false ) echo "mail delivery failed not accepted";
+		}
+	}
+	
+
+}//end of class
+?>
