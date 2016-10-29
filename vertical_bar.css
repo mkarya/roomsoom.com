@@ -8,6 +8,18 @@ topbar {
     margin-left: 0px;
 }
 
+multiPage {
+    height: 20px;
+    width: 20%;
+    background-color: white;
+    float: right;
+    border: 2px solid #73AD21;
+    margin-top: 20px;
+    margin-right: 100;
+    font-size: 16px;
+    font-color:white;
+}
+
 sidebar {
     height: 180px;
     width: 10%;

@@ -33,6 +33,12 @@ class multiplePages {
 
 	}
 
+	public function totalRecord() {
+		$res = $this->conn->query($this->sql);
+		if ($res) {return $res->num_rows;}
+		return 0;
+	}
+
 	public function printTable() {
 		echo "<table style='bgcolor:white;width:90%;' >";
 		echo "<tr>";

@@ -58,8 +58,10 @@ if ($log != "log"){
 
 	$user = $_SESSION['username'];
 
-	$pages = new multiplePages($page_no,$no_of_pages,null,null,null);
+	$pages = new multiplePages($page_no,$no_of_pages,$sql,$db_handle,null);
+	$records = $pages->totalRecord();
 
+        echo "<p style='color:navy; font-size:20px;'> Totol records in this and last months: $records </p>";
 
 	$fullSql = $sql.$pages->range;
 
@@ -77,14 +79,17 @@ if ($log != "log"){
 	if ($previousPage != 1 ) $previousPage = $page_no - 1;
 	else $previousPage = 0;
 
+	echo "<multiPage>";
 	echo '<a href = twoMonthsLeads.php?pageNo='.$previousPage.
 		'&username='.$user.
 		'&conversionStatus='.$conversionStatus. '>'.
-		'              <<'.' </a>';
+		'   << '.' </a>';
+	echo "***20 rec***";
 	echo '<a href = twoMonthsLeads.php?pageNo='.$nextPage.
 		'&username='.$user.
 		'&conversionStatus='.$conversionStatus. '>'.
 		'      >> </a>';
+	echo "</multiPage>";
 	
 	echo '<table bgcolor="white" width="90%">';
 	echo    '<tr>'.
@@ -100,7 +105,6 @@ if ($log != "log"){
 		'</tr>';
 
 	if ($result != null) {
-        	echo "<p style='color:navy; font-size:20px;'> Totol records : $result->num_rows </p>";
         	while($row = $result->fetch_assoc()) {
                 	echo    '<tr>'.
 				'<td> <a href = sales_query.php?query_id='.$row["query_id"].'>'. $row["query_id"] .'</a> </td>'.
