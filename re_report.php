@@ -14,8 +14,10 @@ class rsSalesLeadsReport {
 	}
 
 	public function setMonthNumber($month) {
-		$this->startDate = '2016-'.$month.'-1';
-		$this->endDate = '2016-'.$month.'-31';
+		$year = Date("Y");
+		if ($month > Date("m")) $year = $year - 1;
+		$this->startDate = $year."-".$month.'-1';
+		$this->endDate = $year."-".$month.'-31';
 		$this->colMarker = "`";
 		$this->space = " ";
 		$this->getDistinctTeritory();
@@ -72,9 +74,9 @@ class rsSalesLeadsReport {
 		$totalLeads = 0;
 		$totalConversion = 0;
 		$tempSql = "`Date` >= '".$this->startDate."' AND `Date` <= '".$this->endDate."' AND `Teritory` =";
-		$this->report .= "<p style='color:red;font-weight: bold;font-size:18px'> Report summary Date Range :".
-			$this->space.$this->startDate.$this->space.
-			"and".$this->space. date("Y-m-d").
+		$month = explode("-",$this->startDate);
+		$monthName = date('F', mktime(0, 0, 0, $month[1], 10));
+		$this->report .= "<p style='color:red;font-weight: bold;font-size:18px'> Report summary Month : ". $monthName.
 			"</p>";
 			
 		$this->report .= "<table>";
