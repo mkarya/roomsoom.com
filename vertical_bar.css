@@ -59,7 +59,7 @@ span.white-text {
     margin: 5px;
 }
 
-input[type=text], input[type=date] {
+input {
     width: 200px;
     height:30px;
     padding: 5px 5px;

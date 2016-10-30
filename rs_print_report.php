@@ -26,7 +26,7 @@ include 'sqli.php';
 include 're_report.php';
 
 $report = new rsSalesLeadsReport($db_handle);
-$report->setMonthNumber('10');
+$report->setMonthNumber(Date(m));
 $report->printMonthReport();
 $db_handle->close();
 ?>

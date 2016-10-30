@@ -24,6 +24,7 @@
     			    	<a href="member.php">My Open Sales Leads</a>
     			    	<a href="myTasks.php?state=all">My All Tasks</a>
     			    	<a href="myTasks.php?state=INPROGRESS">My Open Tasks</a>
+    			    	<a href="rs_password_change.php">Change Password</a>
       				<a href="index.php">Logout</a>
 			    </div> 			
  		</li>
