@@ -7,6 +7,7 @@
 			        <a href="twoMonthsLeads.php?username=na&conversionStatus=open">Open Sales Leads</a>
 			        <a href="twoMonthsLeads.php?username=na&conversionStatus=Interested">Converted Sales Leads</a>
 			        <a href="rs_print_report.php">Reports</a>
+			        <a href="rs_print_sales_search.php">Search Sales Query</a>
 			    </div>
 		</li>
   		<li class="dropdown">

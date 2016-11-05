@@ -61,7 +61,7 @@ if ($log != "log"){
 	$pages = new multiplePages($page_no,$no_of_pages,$sql,$db_handle,null);
 	$records = $pages->totalRecord();
 
-        echo "<p style='color:navy; font-size:20px;'> Totol records in this and last months: $records </p>";
+        echo "<p style='color:navy; font-size:20px;'> Totol records : $records </p>";
 
 	$fullSql = $sql.$pages->range;
 
@@ -80,6 +80,8 @@ if ($log != "log"){
 	else $previousPage = 0;
 
 	echo "<multiPage>";
+	//$pages->printNumberOfPageForm();
+	
 	echo '<a href = twoMonthsLeads.php?pageNo='.$previousPage.
 		'&username='.$user.
 		'&conversionStatus='.$conversionStatus. '>'.

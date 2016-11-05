@@ -56,6 +56,16 @@ class multiplePages {
 
 	}
 
+	function printNumberOfPageForm() {
+		echo "<form method='get'>";
+			echo "number of rec per page: ";
+			echo "<select name='numOfRec'>";
+		for ($i = 20; $i < 500 ; $i = $i + 20) {
+			echo "<option value='$i'> $i </option>";
+		} 
+		echo "</form>";
+	}
+
 }
 
 ?>

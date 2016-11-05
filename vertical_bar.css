@@ -9,10 +9,10 @@ topbar {
 }
 
 multiPage {
-    height: 20px;
-    width: 20%;
+    height: 30px;
+    width: 40%;
     background-color: white;
-    float: right;
+    float: middle;
     border: 2px solid #73AD21;
     margin-top: 20px;
     margin-right: 100;

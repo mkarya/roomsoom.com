@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$b = $db_field['password'];
 		$pos = $db_field['position'];
 		if(($user == $a) AND ($pass == $b)){
-			$flag = 1;
 			if($pos == "admin"){
 				session_start();
 				$_SESSION['username'] = $user;
@@ -49,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				break;
 			}
 		}
+		else $flag = 1;
 	}
 	if ($flag == 1) {
 		$msg = "Check username and/or password.";
@@ -76,10 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <a href = "index.php"><img border = "none" src = "images/home.gif"></img></a>
 </td></tr>
 
-<tr><td>
-<a href = "about.php"><img border = "none" src = "images/about.gif"></img></a>
-</td></tr>
-
 </table>
 <div style="top:0; left:170; position:absolute; z-index:1;">
 <img src = "images/image002.gif"></img>
@@ -89,6 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 <div style="top:220; left:370; position:absolute; z-index:1;">
+<?php
+echo "<font color = 'red'>$msg</font>";
+?>
 <form name='login_form' method='post' action='login.php'>
 <table border = "0">
 <tr>
@@ -112,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <div style="top:270; left:383; position:absolute; z-index:1;">
 <?php
-	print "<font color = 'red'>$msg</font>";
 ?>
 </div>
 
